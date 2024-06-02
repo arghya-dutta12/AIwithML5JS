@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <h1>Image classification using MobileNet and p5.js</h1>
+  <script src="sketch.js"></script>
+
+  <div class="input-images">
+    <input type="file" id="imageUploader">
+  </div>
+
+  <script>
+   $(document).ready(function() {
+  $('#imageUploader').change(function(e) {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+      var img = createImg(event.target.result, '', '', function() {
+        image(img, 0, 0, width, height); // Draw the image to the canvas
+        classifyImg(); // Classify the image
+      });
+      img.hide(); // Hide the DOM element
+    }
+    reader.readAsDataURL(e.target.files[0]);
+  });
+});
+  </script>
+</body>
+
+</html>
